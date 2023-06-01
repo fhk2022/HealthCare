@@ -1,0 +1,19 @@
+---
+- name : Configure Docker on EC2 Instances
+  hosts : all
+  become: true
+  become_method: sudo
+  become_user: root
+  connection : ssh
+  tasks : 
+  - name: updating apt
+    command : sudo apt-get update
+
+  - name : Install Docker
+    command : sudo apt-get install -y docker.io
+
+  - name : Start Docker Service
+    command : sudo systemctl start docker
+
+  - name: Deploy Docker Container
+    command: sudo docker run -itd -p 8084:8081 faisalhkdocker/bankingproject:latest 
