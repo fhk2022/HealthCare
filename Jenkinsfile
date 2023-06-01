@@ -24,6 +24,21 @@ pipeline {
     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/HealthCare-Project/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
           }
 }
+  stage('Docker Image Creation'){
+    steps {
+    sh 'docker build -t  faisalhkdocker/healthcare:latest  .'
+          }            
+}
+ stage('Push Image to DockerHub'){
+    steps {
+       withCredentials([usernamePassword(credentialsId: 'Docker-hub-faisalhkdocker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+       sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+       sh 'docker push  faisalhkdocker/healthcare:latest'
+
+                    }
+           }
+            }
+
 }
 }
 
