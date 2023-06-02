@@ -16,4 +16,4 @@
     command : sudo systemctl start docker
 
   - name: Deploy Docker Container
-    command: sudo docker run -itd -p 8084:8081 faisalhkdocker/bankingproject:latest 
+    command: sudo docker run -itd -p 8084:8081 faisalhkdocker/healthcare:latest
