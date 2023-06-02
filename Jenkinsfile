@@ -38,7 +38,18 @@ pipeline {
                     }
            }
             }
+ stage ('create infra  with Terraform, Ansible and then Deploy the application'){
+   steps {
+     dir('test-server'){
+     sh 'chmod 400 Project2.pem'
+     sh 'terraform init'
+     sh 'terraform validate'
+     sh 'terraform apply --auto-approve'
+                }
+            }
+        }
 
 }
+
 }
 
