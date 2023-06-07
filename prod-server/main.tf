@@ -13,12 +13,7 @@ resource "aws_instance" "test-server" {
     inline = [ "echo 'wait to start instance' "]
   }
   tags = {
-    Name = "prod-server"
-  }
-  provisioner "remote-exec" {
-    inline = ["echo ${aws_instance.test-server.public_ip} > inventory"]
-  }
-  provisioner "remote-exec" {
-    inline = ["ansible-playbook /var/lib/jenkins/workspace/HealthCare-Project/prod-server/kuberenetes-playbook.yml"]
-  } 
+    Name = "prod-server" 
 }
+}
+  
