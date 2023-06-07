@@ -39,6 +39,16 @@ pipeline {
 }
 }
 }
+ stage ('create infra in prod server  with Terraform, Ansible and then Deploy the application'){
+   steps {
+     dir('prod-server'){
+     sh 'chmod 400 Project2.pem'
+     sh 'terraform init'
+     sh 'terraform validate'
+     sh 'terraform apply --auto-approve'
+                }
+            }
+        }
 }
 }
                                                                                                                                                                1,1           Top
