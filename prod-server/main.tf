@@ -9,11 +9,17 @@ resource "aws_instance" "test-server" {
     private_key = file("./Project2.pem")
     host     = self.public_ip
   }
-  provisioner "remote-exec" {
-    inline = [ "echo 'wait to start instance' "]
-  }
+  provisioner "local-exec" {
+    command = "sleep 60 && echo 'Instance ready'"
+        }
   tags = {
-    Name = "prod-server" 
+    Name = "prod-server-New" 
 }
+    provisioner "local-exec" {
+    command = " echo ${aws_instance.test-server.public_ip} > inventory "
+  }
+  provisioner "local-exec" {
+    command = "ansible-playbook /var/lib/jenkins/workspace/HealthCare-Project/prod-server/kuberenetes-playbook.yml"
+  } 
 }
   
