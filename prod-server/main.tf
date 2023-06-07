@@ -15,10 +15,10 @@ resource "aws_instance" "test-server" {
   tags = {
     Name = "prod-server"
   }
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = " echo ${aws_instance.test-server.public_ip} > inventory "
   }
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "ansible-playbook /var/lib/jenkins/workspace/HealthCare-Project/prod-server/kuberenetes-playbook.yml"
   } 
 }
