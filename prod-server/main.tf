@@ -10,7 +10,7 @@ resource "aws_instance" "test-server" {
     host     = self.public_ip
   }
   provisioner "remote-exec" {
-    command = "sleep 60 && echo 'Instance ready'"
+    inline = [ "echo 'wait to start instance' "]
   }
   tags = {
     Name = "prod-server"
