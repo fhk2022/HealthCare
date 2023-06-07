@@ -27,7 +27,7 @@ pipeline {
   stage('Docker Image Creation'){
     steps {
     sh 'docker build -t  faisalhkdocker/healthcare:latest  .'
-          }
+          }            
 }
  stage('Push Image to DockerHub'){
     steps {
@@ -35,11 +35,10 @@ pipeline {
        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
        sh 'docker push  faisalhkdocker/healthcare:latest'
 
-
-}
-}
-}
- stage ('create infra in prod server  with Terraform, Ansible and then Deploy the application'){
+                    }
+           }
+            }
+ stage ('create prod infra  with Terraform, Ansible and then Deploy the application using K8s'){
    steps {
      dir('prod-server'){
      sh 'chmod 400 Project2.pem'
@@ -49,6 +48,7 @@ pipeline {
                 }
             }
         }
+
 }
+
 }
-                                                                                                                                                               1,1           Top
