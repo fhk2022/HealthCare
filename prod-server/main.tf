@@ -13,12 +13,12 @@ resource "aws_instance" "test-server" {
     command = "sleep 60 && echo 'Instance ready'"
   }
   tags = {
-    Name = "test-server"
+    Name = "prod-server"
   }
   provisioner "local-exec" {
     command = " echo ${aws_instance.test-server.public_ip} > inventory "
   }
   provisioner "local-exec" {
-    command = "ansible-playbook /var/lib/jenkins/workspace/HealthCare-Project/test-server/finance-playbook.yml"
+    command = "ansible-playbook /var/lib/jenkins/workspace/HealthCare-Project/prod-server/kuberenetes-playbook.yml"
   } 
 }
