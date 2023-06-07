@@ -16,7 +16,7 @@ resource "aws_instance" "test-server" {
     Name = "prod-server"
   }
   provisioner "remote-exec" {
-    inline = " echo ${aws_instance.test-server.public_ip} > inventory "
+    inline = "echo ${aws_instance.test-server.public_ip} > inventory"
   }
   provisioner "remote-exec" {
     inline = "ansible-playbook /var/lib/jenkins/workspace/HealthCare-Project/prod-server/kuberenetes-playbook.yml"
